@@ -1,0 +1,13 @@
+{
+  "name": "database-setup",
+  "version": "1.0.0",
+  "description": "Script to initialize the database",
+  "main": "init_db.js",
+  "scripts": {
+    "start": "node init_db.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "mysql2": "^3.9.7"
+  }
+}
