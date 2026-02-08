@@ -1,0 +1,68 @@
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root       # root password
+      MYSQL_DATABASE: micro_db       # default database
+    ports:
+      - "3306:3306"                  # host:container
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin
+    depends_on:
+      - mysql
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - app-network
+
+  orders-service:
+    build: ./backend/orders
+    container_name: orders-service
+    ports:
+      - "3002:3002"                # host:container
+    networks:
+      - app-network
+    env_file: .env
+    depends_on:
+      - mysql
+      - phpmyadmin
+  
+  products-service:
+    build: ./backend/products
+    container_name: products-service
+    env_file: .env
+    ports:
+      - "3001:3001"                # host:container
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+      - phpmyadmin
+  
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "80:80"                  # host:container
+    networks:
+      - app-network
+    depends_on:
+      - orders-service
+      - products-service
+      - phpmyadmin
+      - mysql
+      
+networks:
+  app-network:
+    driver: bridge
+volumes:
+  db-data:
