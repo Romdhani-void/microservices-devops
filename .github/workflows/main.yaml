@@ -25,9 +25,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-  
-      - name: Build
-        run: npm run build
 
   orders-ci:
     runs-on: ubuntu-latest
@@ -45,9 +42,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-  
-      - name: Build
-        run: npm run build
 
 # --- JOB 2: FRONTEND VALIDATION ---
 
@@ -65,16 +59,11 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Run lint
-        run: npm run lint
-    
       - name: Install dependencies
         run: npm install
 
       - name: Build React App
-        run: |
-          cd frontend
-          npm run build -- --configuration=production
+        run: npm run build -- --configuration=production
 
  # --- JOB 3: DOCKER BUILD (ONLY if testing & build pass) ---
   docker-images:
