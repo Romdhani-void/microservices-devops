@@ -5,7 +5,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-  workflow_dispatch:
 
 jobs:
 # --- JOB 1: BACKEND VALIDATION ---
@@ -63,7 +62,7 @@ jobs:
         run: npm install
 
       - name: Build React App
-        run: npm run build -- --configuration=production
+        run: npm run build
 
  # --- JOB 3: DOCKER BUILD (ONLY if testing & build pass) ---
   docker-images:
