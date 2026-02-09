@@ -8,7 +8,7 @@ function App() {
 
   // Fetch products on load
   useEffect(() => {
-    fetch('http://products-service:3001/products')
+    fetch('/api/products')
       .then(res => res.json())
       .then(data => setProducts(data))
       .catch(err => console.error('Error fetching products:', err))
@@ -20,7 +20,7 @@ function App() {
   }, [])
 
   const fetchOrders = () => {
-    fetch('http://orders-service:3002/orders')
+    fetch('/api/orders')
       .then(res => res.json())
       .then(data => setOrders(data))
       .catch(err => console.error('Error fetching orders:', err))
@@ -28,7 +28,7 @@ function App() {
 
   const handleBuy = (productId) => {
     setLoading(true)
-    fetch('http://orders-service:3002/orders', {
+    fetch('/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ productId, quantity: 1 })
