@@ -49,7 +49,7 @@ services:
       - phpmyadmin
   
   frontend:
-    image: romdhani01/micro-frontend:9f8ff7ffdd32093beb34c63a4320250853474b21
+    image: romdhani01/micro-frontend:b0e69910ba6c52a16781e81220cf5325a8625ccd
     container_name: frontend
     ports:
       - "80:80"                  # host:container
