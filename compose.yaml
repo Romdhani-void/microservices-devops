@@ -25,7 +25,7 @@ services:
       - app-network
 
   orders-service:
-    build: ./backend/orders
+    image: romdhani01/micro-orders:9f8ff7ffdd32093beb34c63a4320250853474b21
     container_name: orders-service
     ports:
       - "3002:3002"                # host:container
@@ -37,7 +37,7 @@ services:
       - phpmyadmin
   
   products-service:
-    build: ./backend/products
+    image: romdhani01/micro-products:9f8ff7ffdd32093beb34c63a4320250853474b21
     container_name: products-service
     env_file: .env
     ports:
@@ -49,7 +49,7 @@ services:
       - phpmyadmin
   
   frontend:
-    build: ./frontend
+    image: romdhani01/micro-frontend:9f8ff7ffdd32093beb34c63a4320250853474b21
     container_name: frontend
     ports:
       - "80:80"                  # host:container
